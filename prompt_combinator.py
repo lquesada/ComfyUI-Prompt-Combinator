@@ -31,7 +31,7 @@ class PromptCombinator:
 
     FUNCTION = "execute"
 
-    CATEGORY = "batch/🔢 PromptCombinator"
+    CATEGORY = "batch"
 
     def parse_input(self, input_list, id_separator, comment_prefix):
         # Split by newlines and ensure at least one empty element if list is empty
