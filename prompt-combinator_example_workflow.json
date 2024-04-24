@@ -1,0 +1,705 @@
+{
+  "last_node_id": 17,
+  "last_link_id": 20,
+  "nodes": [
+    {
+      "id": 1,
+      "type": "PromptCombinator",
+      "pos": [
+        280,
+        370
+      ],
+      "size": {
+        "0": 390,
+        "1": 730
+      },
+      "flags": {},
+      "order": 0,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "combinations",
+          "type": "STRING",
+          "links": [
+            8,
+            10
+          ],
+          "shape": 6,
+          "slot_index": 0
+        },
+        {
+          "name": "id_1",
+          "type": "STRING",
+          "links": [
+            12
+          ],
+          "shape": 6,
+          "slot_index": 1
+        },
+        {
+          "name": "id_2",
+          "type": "STRING",
+          "links": [
+            13
+          ],
+          "shape": 6,
+          "slot_index": 2
+        },
+        {
+          "name": "id_3",
+          "type": "STRING",
+          "links": null,
+          "shape": 6,
+          "slot_index": 3
+        },
+        {
+          "name": "id_4",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PromptCombinator"
+      },
+      "widgets_values": [
+        "@",
+        "#",
+        "# Note: format is ID@description\n# - ID is optional\n# - Comments/empty lines are ignored)\n\n# Animals\ncat@a cat\ndog@a dog\n\n#People\nwoman@a woman \n",
+        "car@driving a car\n\nbike@riding a bike",
+        "# IDs are optional\ncarrying an umbrella\n",
+        ""
+      ]
+    },
+    {
+      "id": 7,
+      "type": "String Literal",
+      "pos": [
+        280,
+        1160
+      ],
+      "size": {
+        "0": 390,
+        "1": 100
+      },
+      "flags": {},
+      "order": 1,
+      "mode": 0,
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            9
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "title": "Negative Prompt",
+      "properties": {
+        "Node name for S&R": "String Literal"
+      },
+      "widgets_values": [
+        "ugly"
+      ]
+    },
+    {
+      "id": 8,
+      "type": "ShowText|pysssss",
+      "pos": [
+        850,
+        190
+      ],
+      "size": {
+        "0": 210,
+        "1": 360
+      },
+      "flags": {},
+      "order": 3,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 10,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "a cat\ndriving a car\ncarrying an umbrella\n",
+        "a cat\nriding a bike\ncarrying an umbrella\n",
+        "a dog\ndriving a car\ncarrying an umbrella\n",
+        "a dog\nriding a bike\ncarrying an umbrella\n",
+        "a woman\ndriving a car\ncarrying an umbrella\n",
+        "a woman\nriding a bike\ncarrying an umbrella\n"
+      ]
+    },
+    {
+      "id": 4,
+      "type": "Efficient Loader",
+      "pos": [
+        770,
+        870
+      ],
+      "size": {
+        "0": 400,
+        "1": 460
+      },
+      "flags": {},
+      "order": 5,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "lora_stack",
+          "type": "LORA_STACK",
+          "link": null
+        },
+        {
+          "name": "cnet_stack",
+          "type": "CONTROL_NET_STACK",
+          "link": null
+        },
+        {
+          "name": "positive",
+          "type": "STRING",
+          "link": 8,
+          "widget": {
+            "name": "positive"
+          }
+        },
+        {
+          "name": "negative",
+          "type": "STRING",
+          "link": 9,
+          "widget": {
+            "name": "negative"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": [
+            2
+          ],
+          "shape": 3,
+          "slot_index": 0
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": [
+            3
+          ],
+          "shape": 3,
+          "slot_index": 1
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": [
+            4
+          ],
+          "shape": 3,
+          "slot_index": 2
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": [
+            5
+          ],
+          "shape": 3,
+          "slot_index": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": [
+            6
+          ],
+          "shape": 3,
+          "slot_index": 4
+        },
+        {
+          "name": "CLIP",
+          "type": "CLIP",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "DEPENDENCIES",
+          "type": "DEPENDENCIES",
+          "links": null,
+          "shape": 3
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "Efficient Loader"
+      },
+      "widgets_values": [
+        "epicphotogasm_ultimateFidelity.safetensors",
+        "Baked VAE",
+        -1,
+        "None",
+        1,
+        1,
+        "CLIP_POSITIVE",
+        "CLIP_NEGATIVE",
+        "none",
+        "comfy",
+        512,
+        512,
+        1
+      ],
+      "color": "#322",
+      "bgcolor": "#533",
+      "shape": 1
+    },
+    {
+      "id": 11,
+      "type": "ShowText|pysssss",
+      "pos": [
+        1080,
+        190
+      ],
+      "size": {
+        "0": 210,
+        "1": 360
+      },
+      "flags": {},
+      "order": 6,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text",
+          "type": "STRING",
+          "link": 15,
+          "widget": {
+            "name": "text"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": null,
+          "shape": 6
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "ShowText|pysssss"
+      },
+      "widgets_values": [
+        "",
+        "cat, car",
+        "cat, bike",
+        "dog, car",
+        "dog, bike",
+        "woman, car",
+        "woman, bike"
+      ]
+    },
+    {
+      "id": 17,
+      "type": "Note",
+      "pos": [
+        280,
+        80
+      ],
+      "size": [
+        520,
+        60
+      ],
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "https://github.com/lquesada/ComfyUI-Prompt-Combinator - ComfyUI-Prompt-Combinator"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    },
+    {
+      "id": 10,
+      "type": "StringFunction|pysssss",
+      "pos": [
+        850,
+        610
+      ],
+      "size": {
+        "0": 290,
+        "1": 214
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "text_a",
+          "type": "STRING",
+          "link": 12,
+          "widget": {
+            "name": "text_a"
+          }
+        },
+        {
+          "name": "text_b",
+          "type": "STRING",
+          "link": 13,
+          "widget": {
+            "name": "text_b"
+          }
+        }
+      ],
+      "outputs": [
+        {
+          "name": "STRING",
+          "type": "STRING",
+          "links": [
+            14,
+            15
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "StringFunction|pysssss"
+      },
+      "widgets_values": [
+        "append",
+        "yes",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "id": 5,
+      "type": "KSampler (Efficient)",
+      "pos": [
+        1200,
+        870
+      ],
+      "size": [
+        330,
+        560
+      ],
+      "flags": {},
+      "order": 7,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "model",
+          "type": "MODEL",
+          "link": 2
+        },
+        {
+          "name": "positive",
+          "type": "CONDITIONING",
+          "link": 3
+        },
+        {
+          "name": "negative",
+          "type": "CONDITIONING",
+          "link": 4
+        },
+        {
+          "name": "latent_image",
+          "type": "LATENT",
+          "link": 5
+        },
+        {
+          "name": "optional_vae",
+          "type": "VAE",
+          "link": 6
+        },
+        {
+          "name": "script",
+          "type": "SCRIPT",
+          "link": null
+        }
+      ],
+      "outputs": [
+        {
+          "name": "MODEL",
+          "type": "MODEL",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING+",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "CONDITIONING-",
+          "type": "CONDITIONING",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "LATENT",
+          "type": "LATENT",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "VAE",
+          "type": "VAE",
+          "links": null,
+          "shape": 3
+        },
+        {
+          "name": "IMAGE",
+          "type": "IMAGE",
+          "links": [
+            7,
+            11
+          ],
+          "shape": 3,
+          "slot_index": 5
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "KSampler (Efficient)"
+      },
+      "widgets_values": [
+        76,
+        null,
+        20,
+        7,
+        "euler",
+        "normal",
+        1,
+        "auto",
+        "true"
+      ],
+      "color": "#223322",
+      "bgcolor": "#335533",
+      "shape": 1
+    },
+    {
+      "id": 6,
+      "type": "PreviewImage",
+      "pos": [
+        1560,
+        870
+      ],
+      "size": [
+        430,
+        630
+      ],
+      "flags": {},
+      "order": 8,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 7
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "PreviewImage"
+      }
+    },
+    {
+      "id": 9,
+      "type": "SaveImage",
+      "pos": [
+        1640,
+        490
+      ],
+      "size": {
+        "0": 250,
+        "1": 270
+      },
+      "flags": {},
+      "order": 9,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "images",
+          "type": "IMAGE",
+          "link": 11
+        },
+        {
+          "name": "filename_prefix",
+          "type": "STRING",
+          "link": 14,
+          "widget": {
+            "name": "filename_prefix"
+          }
+        }
+      ],
+      "properties": {},
+      "widgets_values": [
+        "ComfyUI"
+      ]
+    },
+    {
+      "id": 16,
+      "type": "Note",
+      "pos": [
+        850,
+        80
+      ],
+      "size": {
+        "0": 450,
+        "1": 60
+      },
+      "flags": {},
+      "order": 2,
+      "mode": 0,
+      "properties": {
+        "text": ""
+      },
+      "widgets_values": [
+        "Note:\n- The different prompts generated (below this box, left)\n- The vs filename_prefixes generated from IDs (below this box, right)"
+      ],
+      "color": "#432",
+      "bgcolor": "#653"
+    }
+  ],
+  "links": [
+    [
+      2,
+      4,
+      0,
+      5,
+      0,
+      "MODEL"
+    ],
+    [
+      3,
+      4,
+      1,
+      5,
+      1,
+      "CONDITIONING"
+    ],
+    [
+      4,
+      4,
+      2,
+      5,
+      2,
+      "CONDITIONING"
+    ],
+    [
+      5,
+      4,
+      3,
+      5,
+      3,
+      "LATENT"
+    ],
+    [
+      6,
+      4,
+      4,
+      5,
+      4,
+      "VAE"
+    ],
+    [
+      7,
+      5,
+      5,
+      6,
+      0,
+      "IMAGE"
+    ],
+    [
+      8,
+      1,
+      0,
+      4,
+      2,
+      "STRING"
+    ],
+    [
+      9,
+      7,
+      0,
+      4,
+      3,
+      "STRING"
+    ],
+    [
+      10,
+      1,
+      0,
+      8,
+      0,
+      "STRING"
+    ],
+    [
+      11,
+      5,
+      5,
+      9,
+      0,
+      "IMAGE"
+    ],
+    [
+      12,
+      1,
+      1,
+      10,
+      0,
+      "STRING"
+    ],
+    [
+      13,
+      1,
+      2,
+      10,
+      1,
+      "STRING"
+    ],
+    [
+      14,
+      10,
+      0,
+      9,
+      1,
+      "STRING"
+    ],
+    [
+      15,
+      10,
+      0,
+      11,
+      0,
+      "STRING"
+    ]
+  ],
+  "groups": [],
+  "config": {},
+  "extra": {},
+  "version": 0.4
+}
