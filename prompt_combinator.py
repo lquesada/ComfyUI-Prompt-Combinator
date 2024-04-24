@@ -3,7 +3,11 @@ from itertools import product
 
 class PromptCombinator:
     """
-    A example node
+    ComfyUI-Prompt-Combinator
+    https://github.com/lquesada/ComfyUI-Prompt-Combinator
+
+    Node that generates all possible combinations of prompts from several lists of strings.
+
     """
     def __init__(self):
         pass
