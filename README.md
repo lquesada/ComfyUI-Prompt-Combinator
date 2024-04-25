@@ -7,6 +7,8 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 
 "🔢 Prompt Combinator" is a node that generates all possible combinations of prompts from several lists of strings.
 
+"🔢 Prompt Combinator Merger" is a node that enables merging the output of two different "🔢 Prompt Combinator" nodes.
+
 Download the following example workflow from [here](prompt-combinator_example_workflow.json) or drag and drop the screenshot into ComfyUI.
 
 ![Workflow](prompt-combinator_example_workflow.png)

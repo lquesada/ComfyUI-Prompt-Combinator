@@ -7,11 +7,10 @@ class PromptCombinator:
     https://github.com/lquesada/ComfyUI-Prompt-Combinator
 
     Node that generates all possible combinations of prompts from several lists of strings.
-
     """
     def __init__(self):
         pass
-    
+
     @classmethod
     def INPUT_TYPES(cls):
         return {
@@ -82,3 +81,65 @@ class PromptCombinator:
         combinations, (ids1, ids2, ids3, ids4) = self.combine_descriptions_and_ids(input_list_1, input_list_2, input_list_3, input_list_4, id_separator=id_separator, comment_prefix=comment_prefix)
         return (combinations, ids1, ids2, ids3, ids4)
 
+
+class PromptCombinatorMerger:
+    """
+    ComfyUI-Prompt-Combinator
+    https://github.com/lquesada/ComfyUI-Prompt-Combinator
+
+    Node that merges the prompts and IDs out of two PromptCombinators.
+    """
+    def __init__(self):
+        pass
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "combinations_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "combinations_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+            },
+            "optional": {
+                "input_id1_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id2_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id3_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id4_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id1_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id2_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id3_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id4_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+            }
+        }
+    INPUT_IS_LIST = (True, True, True, True, True, True, True, True, True, True)
+
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("combinations", "id_1", "id_2", "id_3", "id_4")
+    OUTPUT_IS_LIST = (True, True, True, True, True)
+
+    FUNCTION = "execute"
+
+    CATEGORY = "batch"
+
+    def merge_lists(self, list1, list2):
+        """
+        Helper method to merge two lists, handling cases where one or both may be undefined or empty.
+        """
+        if not list1:
+            list1 = []
+        if not list2:
+            list2 = []
+        return list1 + list2
+
+    def execute(self, combinations_1, input_id1_list_1, input_id2_list_1, input_id3_list_1, input_id4_list_1, combinations_2, input_id1_list_2, input_id2_list_2, input_id3_list_2, input_id4_list_2):
+        # Combine the combinations and IDs lists from two sets of inputs
+        combined_combinations = self.merge_lists(combinations_1, combinations_2)
+        combined_ids1 = self.merge_lists(input_id1_list_1, input_id1_list_2)
+        combined_ids2 = self.merge_lists(input_id2_list_1, input_id2_list_2)
+        combined_ids3 = self.merge_lists(input_id3_list_1, input_id3_list_2)
+        combined_ids4 = self.merge_lists(input_id4_list_1, input_id4_list_2)
+
+        # Check if all outputs are empty, return None if so
+        if not any([combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4]):
+            return None
+
+        return (combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4)
