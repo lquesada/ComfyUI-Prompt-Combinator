@@ -9,9 +9,15 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 
 "🔢 Prompt Combinator Merger" is a node that enables merging the output of two different "🔢 Prompt Combinator" nodes.
 
+## Simple example
 Download the following example workflow from [here](prompt-combinator_example_workflow.json) or drag and drop the screenshot into ComfyUI.
 
 ![Workflow](prompt-combinator_example_workflow.png)
+
+## Advanced example
+Download the following example workflow from [here](prompt-combinator_example_workflow_advanced.json) or drag and drop the screenshot into ComfyUI.
+
+![Workflow](prompt-combinator_example_workflow_advanced.png)
 
 # Installation Instructions
 
