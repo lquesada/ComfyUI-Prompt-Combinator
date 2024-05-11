@@ -1,4 +1,5 @@
 ComfyUI-Prompt-Combinator
+
 Copyright (c) 2024, Luis Quesada Torres - https://github.com/lquesada | www.luisquesada.com
 
 Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
