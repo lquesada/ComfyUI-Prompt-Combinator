@@ -130,7 +130,7 @@ class PromptCombinatorMerger:
             list2 = []
         return list1 + list2
 
-    def execute(self, combinations_1, input_id1_list_1, input_id2_list_1, input_id3_list_1, input_id4_list_1, combinations_2, input_id1_list_2, input_id2_list_2, input_id3_list_2, input_id4_list_2):
+    def execute(self, combinations_1, combinations_2, input_id1_list_1 = None, input_id2_list_1 = None, input_id3_list_1 = None, input_id4_list_1 = None, input_id1_list_2 = None, input_id2_list_2 = None, input_id3_list_2 = None, input_id4_list_2 = None):
         # Combine the combinations and IDs lists from two sets of inputs
         combined_combinations = self.merge_lists(combinations_1, combinations_2)
         combined_ids1 = self.merge_lists(input_id1_list_1, input_id1_list_2)
