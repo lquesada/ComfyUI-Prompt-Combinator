@@ -18,6 +18,8 @@ class PromptCombinator:
                 "id_separator": ("STRING", {"default": '@'}),
                 "comment_prefix": ("STRING", {"default": '#'}),
                 "input_list_1": ("STRING", {"default": '', "multiline": True}),
+            },
+            "optional": {
                 "input_list_2": ("STRING", {"default": '', "multiline": True}),
                 "input_list_3": ("STRING", {"default": '', "multiline": True}),
                 "input_list_4": ("STRING", {"default": '', "multiline": True}),
@@ -77,7 +79,7 @@ class PromptCombinator:
     
         return outputs, id_lists
 
-    def execute(self, id_separator, comment_prefix, input_list_1, input_list_2, input_list_3, input_list_4):
+    def execute(self, id_separator, comment_prefix, input_list_1, input_list_2="", input_list_3="", input_list_4=""):
         combinations, (ids1, ids2, ids3, ids4) = self.combine_descriptions_and_ids(input_list_1, input_list_2, input_list_3, input_list_4, id_separator=id_separator, comment_prefix=comment_prefix)
         return (combinations, ids1, ids2, ids3, ids4)
 
@@ -130,7 +132,7 @@ class PromptCombinatorMerger:
             list2 = []
         return list1 + list2
 
-    def execute(self, combinations_1, combinations_2, input_id1_list_1 = None, input_id2_list_1 = None, input_id3_list_1 = None, input_id4_list_1 = None, input_id1_list_2 = None, input_id2_list_2 = None, input_id3_list_2 = None, input_id4_list_2 = None):
+    def execute(self, combinations_1, combinations_2, input_id1_list_1=None, input_id2_list_1=None, input_id3_list_1=None, input_id4_list_1=None, input_id1_list_2=None, input_id2_list_2=None, input_id3_list_2=None, input_id4_list_2=None):
         # Combine the combinations and IDs lists from two sets of inputs
         combined_combinations = self.merge_lists(combinations_1, combinations_2)
         combined_ids1 = self.merge_lists(input_id1_list_1, input_id1_list_2)
