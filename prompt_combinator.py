@@ -23,12 +23,16 @@ class PromptCombinator:
                 "input_list_2": ("STRING", {"default": '', "multiline": True}),
                 "input_list_3": ("STRING", {"default": '', "multiline": True}),
                 "input_list_4": ("STRING", {"default": '', "multiline": True}),
+                "input_list_5": ("STRING", {"default": '', "multiline": True}),
+                "input_list_6": ("STRING", {"default": '', "multiline": True}),
+                "input_list_7": ("STRING", {"default": '', "multiline": True}),
+                "input_list_8": ("STRING", {"default": '', "multiline": True}),
             }
         }
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("combinations", "id_1", "id_2", "id_3", "id_4")
-    OUTPUT_IS_LIST = (True, True, True, True, True)
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("combinations", "id_1", "id_2", "id_3", "id_4", "id_5", "id_6", "id_7", "id_8")
+    OUTPUT_IS_LIST = (True, True, True, True, True, True, True, True, True)
 
     FUNCTION = "execute"
 
@@ -79,9 +83,9 @@ class PromptCombinator:
     
         return outputs, id_lists
 
-    def execute(self, id_separator, comment_prefix, input_list_1, input_list_2="", input_list_3="", input_list_4=""):
-        combinations, (ids1, ids2, ids3, ids4) = self.combine_descriptions_and_ids(input_list_1, input_list_2, input_list_3, input_list_4, id_separator=id_separator, comment_prefix=comment_prefix)
-        return (combinations, ids1, ids2, ids3, ids4)
+    def execute(self, id_separator, comment_prefix, input_list_1, input_list_2="", input_list_3="", input_list_4="", input_list_5="", input_list_6="", input_list_7="", input_list_8=""):
+        combinations, (ids1, ids2, ids3, ids4, ids5, ids6, ids7, ids8) = self.combine_descriptions_and_ids(input_list_1, input_list_2, input_list_3, input_list_4, input_list_5, input_list_6, input_list_7, input_list_8, id_separator=id_separator, comment_prefix=comment_prefix)
+        return (combinations, ids1, ids2, ids3, ids4, ids5, ids6, ids7, ids8)
 
 
 class PromptCombinatorMerger:
@@ -106,17 +110,25 @@ class PromptCombinatorMerger:
                 "input_id2_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id3_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id4_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id5_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id6_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id7_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id8_list_1": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id1_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id2_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id3_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
                 "input_id4_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id5_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id6_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id7_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "input_id8_list_2": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
             }
         }
-    INPUT_IS_LIST = (True, True, True, True, True, True, True, True, True, True)
+    INPUT_IS_LIST = (True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True, True)
 
-    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING")
-    RETURN_NAMES = ("combinations", "id_1", "id_2", "id_3", "id_4")
-    OUTPUT_IS_LIST = (True, True, True, True, True)
+    RETURN_TYPES = ("STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING", "STRING")
+    RETURN_NAMES = ("combinations", "id_1", "id_2", "id_3", "id_4", "id_5", "id_6", "id_7", "id_8")
+    OUTPUT_IS_LIST = (True, True, True, True, True, True, True, True, True)
 
     FUNCTION = "execute"
 
@@ -132,16 +144,20 @@ class PromptCombinatorMerger:
             list2 = []
         return list1 + list2
 
-    def execute(self, combinations_1, combinations_2, input_id1_list_1=None, input_id2_list_1=None, input_id3_list_1=None, input_id4_list_1=None, input_id1_list_2=None, input_id2_list_2=None, input_id3_list_2=None, input_id4_list_2=None):
+    def execute(self, combinations_1, combinations_2, input_id1_list_1=None, input_id2_list_1=None, input_id3_list_1=None, input_id4_list_1=None, input_id5_list_1=None, input_id6_list_1=None, input_id7_list_1=None, input_id8_list_1=None, input_id1_list_2=None, input_id2_list_2=None, input_id3_list_2=None, input_id4_list_2=None, input_id5_list_2=None, input_id6_list_2=None, input_id7_list_2=None, input_id8_list_2=None,):
         # Combine the combinations and IDs lists from two sets of inputs
         combined_combinations = self.merge_lists(combinations_1, combinations_2)
         combined_ids1 = self.merge_lists(input_id1_list_1, input_id1_list_2)
         combined_ids2 = self.merge_lists(input_id2_list_1, input_id2_list_2)
         combined_ids3 = self.merge_lists(input_id3_list_1, input_id3_list_2)
         combined_ids4 = self.merge_lists(input_id4_list_1, input_id4_list_2)
+        combined_ids5 = self.merge_lists(input_id5_list_1, input_id5_list_2)
+        combined_ids6 = self.merge_lists(input_id6_list_1, input_id6_list_2)
+        combined_ids7 = self.merge_lists(input_id7_list_1, input_id7_list_2)
+        combined_ids8 = self.merge_lists(input_id8_list_1, input_id8_list_2)
 
         # Check if all outputs are empty, return None if so
-        if not any([combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4]):
+        if not any([combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4, combined_ids5, combined_ids6, combined_ids7, combined_ids8]):
             return None
 
-        return (combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4)
+        return (combined_combinations, combined_ids1, combined_ids2, combined_ids3, combined_ids4, combined_ids5, combined_ids6, combined_ids7, combined_ids8)
