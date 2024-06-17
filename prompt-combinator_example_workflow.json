@@ -3,48 +3,6 @@
   "last_link_id": 184,
   "nodes": [
     {
-      "id": 72,
-      "type": "CLIPTextEncode",
-      "pos": [
-        890,
-        830
-      ],
-      "size": {
-        "0": 260,
-        "1": 90
-      },
-      "flags": {},
-      "order": 4,
-      "mode": 0,
-      "inputs": [
-        {
-          "name": "clip",
-          "type": "CLIP",
-          "link": 172,
-          "slot_index": 0
-        }
-      ],
-      "outputs": [
-        {
-          "name": "CONDITIONING",
-          "type": "CONDITIONING",
-          "links": [
-            173
-          ],
-          "shape": 3,
-          "slot_index": 0
-        }
-      ],
-      "properties": {
-        "Node name for S&R": "CLIPTextEncode"
-      },
-      "widgets_values": [
-        "text, watermark, ugl"
-      ],
-      "color": "#322",
-      "bgcolor": "#533"
-    },
-    {
       "id": 71,
       "type": "CLIPTextEncode",
       "pos": [
@@ -404,6 +362,48 @@
         "",
         ""
       ]
+    },
+    {
+      "id": 72,
+      "type": "CLIPTextEncode",
+      "pos": [
+        890,
+        830
+      ],
+      "size": {
+        "0": 260,
+        "1": 90
+      },
+      "flags": {},
+      "order": 4,
+      "mode": 0,
+      "inputs": [
+        {
+          "name": "clip",
+          "type": "CLIP",
+          "link": 172,
+          "slot_index": 0
+        }
+      ],
+      "outputs": [
+        {
+          "name": "CONDITIONING",
+          "type": "CONDITIONING",
+          "links": [
+            173
+          ],
+          "shape": 3,
+          "slot_index": 0
+        }
+      ],
+      "properties": {
+        "Node name for S&R": "CLIPTextEncode"
+      },
+      "widgets_values": [
+        "text, watermark, ugly"
+      ],
+      "color": "#322",
+      "bgcolor": "#533"
     }
   ],
   "links": [
@@ -510,8 +510,8 @@
     "ds": {
       "scale": 0.8264462809917356,
       "offset": [
-        113.92283247386948,
-        212.3823936105624
+        35.5607096711351,
+        2.188134272183487
       ]
     }
   },
