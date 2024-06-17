@@ -10,15 +10,14 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 
 "🔢 Prompt Combinator Merger" is a node that enables merging the output of two different "🔢 Prompt Combinator" nodes.
 
+"🔢 Prompt Combinator Export Gallery" is a node that generates an .html gallery to navigate the output of Prompt Combinator (prompts vs. images)
+
+See an example of gallery [here](example_gallery.html).
+
 ## Simple example
 Download the following example workflow from [here](prompt-combinator_example_workflow.json) or drag and drop the screenshot into ComfyUI.
 
 ![Workflow](prompt-combinator_example_workflow.png)
-
-## Advanced example
-Download the following example workflow from [here](prompt-combinator_example_workflow_advanced.json) or drag and drop the screenshot into ComfyUI.
-
-![Workflow](prompt-combinator_example_workflow_advanced.png)
 
 # Installation Instructions
 
@@ -98,37 +97,40 @@ scary
 ```
 
 Additionally, you may want to be able to identify what inputs were used in order to craft the filename_prefix, e.g.:
-cat, pointy-ears, scary_00001_.png
-dog, two-heads, cute_00001_.png
+cat, pointy ears, scary_00001_.png
+dog, two heads, cute_00001_.png
 
-This custom node serves this purpose.
+In order to achieve that, prepend the prompts with ids, e.g.:
+
+**Input list 1:**
+```
+cat@a cat
+dog@a dog
+```
+
+**Input list 2:**
+```
+pointy ears@with pointy ears
+fluffy tail@with fluffy tail
+two heads@with two heads
+```
+
+**Input list 3:**
+```
+cute@cute
+scary@scary
+```
+
+# Changelog
+## 2024-06-17
+- Added Prompt Combinator Export Gallery node.
+- Simplified input/output setup.
+## 2024-05-25
+- Extended from 4 inputs to 8 inputs.
+## 2024-04-25
+- Added Prompt Combinator Merge node.
+## 2024-04-24
+- Initial commit.
 
 # License
-Creative Commons License Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0)
-
-This is a human-readable summary of the Legal Code.
-
-You are free:
-
-*   to Share — to copy, distribute and transmit the work
-*   to Remix — to adapt the work
-
-Under the following conditions:
-
-*   Attribution — You must attribute the work in the manner specified by the author or licensor (but not in any way that suggests that they endorse you or your use of the work).
-
-*   Noncommercial — You may not use this work for commercial purposes.
-
-*   Share Alike — If you alter, transform, or build upon this work, you may distribute the resulting work only under the same or similar license to this one.
-
-With the understanding that:
-
-*   Waiver — Any of the above conditions can be waived if you get permission from the copyright holder.
-*   Public Domain — Where the work or any of its elements is in the public domain under applicable law, that status is in no way affected by the license.
-*   Other Rights — In no way are any of the following rights affected by the license:
-       Your fair dealing or fair use rights, or other applicable copyright exceptions and limitations;
-       The author's moral rights;
-       Rights other persons may have either in the work itself or in how the work is used, such as publicity or privacy rights.
-*   Notice — For any reuse or distribution, you must make clear to others the license terms of this work. The best way to do this is with a link to this web page.
-
-For details and the full license text, see http://creativecommons.org/licenses/by-nc-sa/3.0/
+Creative Commons License Attribution-NonCommercial-ShareAlike 3.0 Unported (CC BY-NC-SA 3.0), see [LICENSE](LICENSE)

@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Generated using the ComfyUI Prompt Combinator nodes (https://github.com/lquesada/ComfyUI-Prompt-Combinator) -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <style>
+        html {
+            overflow-y: scroll;
+        }
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            font-size: 70%;
+            text-align: right;
+        }
+        .buttons {
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            user-select: none;
+        }
+        .button.selected {
+            background-color: #007bff;
+            color: white;
+        }
+        .button.disabled {
+            background-color: #e0e0e0;
+            color: #a0a0a0;
+        }
+        .button.selected-disabled {
+            background-color: #ff6666;
+            color: white;
+        }
+        .image-container {
+            text-align: center;
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+        .image-container img {
+            display: block;
+        }
+        .prompt {
+            margin-top: 20px;
+        }
+        .filename {
+            margin-top: 20px;
+            font-size: 80%;
+        }
+        .zoom-controls {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .zoom-controls input[type=range] {
+            width: 300px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">Generated using the <a href="https://github.com/lquesada/ComfyUI-Prompt-Combinator">ComfyUI Prompt Combinator</a> nodes</div>
+<div class="zoom-controls">
+    Zoom <input type="range" id="zoom-slider" min="10" max="300" value="100">
+    <button id="reset-zoom">Set to 100%</button>
+    <button id="auto-zoom-device">Fit device screen</button>
+    <button id="auto-zoom-window">Fit window</button>
+</div>
+<div id="button-container"></div>
+<div class="image-container" id="image-container">
+    <img id="selected-image" src="">
+    <div class="prompt" id="image-prompt"></div>
+    <div class="filename" id="image-filename-container">(<a id="image-filename" href="" target="_blank"></a>)</div>
+</div>
+
+<script>
+    // Fill these in from the node
+    const ids1 = {!ids1};
+    const ids2 = {!ids2};
+    const ids3 = {!ids3};
+    const ids4 = {!ids4};
+    const ids5 = {!ids5};
+    const ids6 = {!ids6};
+    const ids7 = {!ids7};
+    const ids8 = {!ids8};
+    const fileprefix = {!fileprefix};
+    const filesuffix = {!filesuffix};
+    const images = {!images};
+    const width = {!width};
+    const height = {!height};
+    const format = {!format};
+
+    const defaultImage = images[0].filename;
+    const idLists = [ids1, ids2, ids3, ids4, ids5, ids6, ids7, ids8];
+    const selectedIds = idLists.map(list => list ? list[0] : null);
+
+    const initialSelections = defaultImage.replace(fileprefix, '').replace(filesuffix, '').split('-');
+    idLists.forEach((list, index) => {
+        if (list && initialSelections[index]) {
+            selectedIds[index] = initialSelections[index];
+        }
+    });
+
+    const selectedClass = 'selected';
+
+    function isValidCombination() {
+        const selectedPath = selectedIds.map(id => id || '').join('-');
+        const imagePath = `${fileprefix}${selectedPath}${filesuffix}`;
+        return images.some(image => image.filename === imagePath);
+    }
+
+    function getImageData() {
+        const selectedPath = selectedIds.map(id => id || '').join('-');
+        const imagePath = `${fileprefix}${selectedPath}${filesuffix}`;
+        return images.find(image => image.filename === imagePath);
+    }
+
+    function updateImage() {
+        const imageContainer = document.getElementById('image-container');
+        const selectedImage = document.getElementById('selected-image');
+        const promptDiv = document.getElementById('image-prompt');
+        const filenameLink = document.getElementById('image-filename');
+        const filenameLinkContainer = document.getElementById('image-filename-container');
+        const zoomSlider = document.getElementById('zoom-slider');
+
+        const imageData = getImageData();
+
+        if (!imageData) {
+            // No valid combination selected, hide all elements and return
+            selectedImage.style.display = 'none';
+            promptDiv.style.display = 'none';
+            filenameLink.style.display = 'none';
+            filenameLinkContainer.style.display = 'none';
+        } else {
+            // Valid combination selected, show all elements
+            selectedImage.style.display = 'block';
+            promptDiv.style.display = 'block';
+            filenameLink.style.display = 'inline';
+            filenameLinkContainer.style.display = 'block';
+
+            // Update the elements
+            selectedImage.src = imageData.filename;
+            selectedImage.style.width = `${width}px`;
+            selectedImage.style.height = `${height}px`;
+            promptDiv.textContent = imageData.prompt;
+            filenameLink.textContent = `${imageData.id}.${format}`;
+            filenameLink.href = imageData.filename;
+            filenameLink.download = `${imageData.id}.${format}`;
+
+            // Update zoom level
+            setZoomLevel(zoomSlider.value);
+        }
+
+        preloadNearbyImages();
+    }
+
+    function createButtons(list, index) {
+        if (!list) return;
+
+        const container = document.createElement('div');
+        container.className = 'buttons';
+
+        list.forEach(id => {
+            const button = document.createElement('div');
+            button.className = 'button';
+            if (id) {
+                button.textContent = id;
+            } else {
+                button.innerHTML = '&nbsp;';
+            }
+
+            button.addEventListener('click', () => {
+                document.querySelectorAll(`.buttons:nth-child(${index + 1}) .button`).forEach(btn => {
+                    btn.classList.remove('selected', 'selected-disabled');
+                });
+                selectedIds[index] = id;
+                updateButtonStates();
+                updateImage();
+            });
+
+            container.appendChild(button);
+        });
+
+        document.getElementById('button-container').appendChild(container);
+    }
+
+    function updateButtonStates() {
+        idLists.forEach((list, index) => {
+            if (list) {
+                const buttonsContainer = document.querySelector(`.buttons:nth-child(${index + 1})`);
+                if (buttonsContainer) {
+                    const buttons = buttonsContainer.querySelectorAll('.button');
+                    list.forEach((id, idIndex) => {
+                        const tempSelectedIds = [...selectedIds];
+                        tempSelectedIds[index] = id;
+                        const isValid = images.some(image => image.filename === `${fileprefix}${tempSelectedIds.map(id => id || '').join('-')}${filesuffix}`);
+                        const button = buttons[idIndex];
+                        if (button) {
+                            button.classList.remove('disabled', 'selected', 'selected-disabled');
+                            if (!isValid) {
+                                button.classList.add('disabled');
+                                if (id === selectedIds[index]) {
+                                    button.classList.add('selected-disabled');
+                                }
+                            } else {
+                                if (id === selectedIds[index]) {
+                                    button.classList.add('selected');
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+    }
+
+    function preloadImage(src) {
+        if (images.some(image => image.filename === src)) {
+            const img = new Image();
+            img.src = src;
+        }
+    }
+
+    function preloadNearbyImages() {
+        idLists.forEach((list, index) => {
+            if (list) {
+                list.forEach(id => {
+                    const tempSelectedIds = [...selectedIds];
+                    tempSelectedIds[index] = id;
+                    const selectedPath = tempSelectedIds.map(id => id || '').join('-');
+                    const imagePath = `${fileprefix}${selectedPath}${filesuffix}`;
+                    preloadImage(imagePath);
+                });
+            }
+        });
+    }
+
+    function setZoomLevel(zoom) {
+        const selectedImage = document.getElementById('selected-image');
+        selectedImage.style.width = `${width * (zoom / 100)}px`;
+        selectedImage.style.height = `${height * (zoom / 100)}px`;
+    }
+
+    function setAutoZoomWindow() {
+        const windowHeight = window.innerHeight;
+        const headerHeight = 190; // Adjust as necessary for header height
+        const footerHeight = 110; // Adjust as necessary for footer height
+        const margin = 20; // Adjust as necessary for margins
+
+        const availableHeight = windowHeight - headerHeight - footerHeight - margin;
+
+        const imageAspectRatio = width / height;
+        const windowAspectRatio = window.innerWidth / availableHeight;
+
+        let zoomLevel;
+
+        if (imageAspectRatio > windowAspectRatio) {
+            zoomLevel = Math.min(200, Math.max(10, (window.innerWidth / width) * 100));
+        } else {
+            zoomLevel = Math.min(200, Math.max(10, (availableHeight / height) * 100));
+        }
+
+        document.getElementById('zoom-slider').value = zoomLevel;
+        setZoomLevel(zoomLevel);
+    }
+
+    function setAutoZoomDevice() {
+        const windowHeight = window.innerHeight;
+        const margin = 100; // Adjust as necessary for margins
+        const zoomLevel = Math.min(200, Math.max(10, (windowHeight - margin) / height * 100));
+        document.getElementById('zoom-slider').value = zoomLevel;
+        setZoomLevel(zoomLevel);
+    }
+
+    document.getElementById('zoom-slider').addEventListener('input', (event) => {
+        setZoomLevel(event.target.value);
+    });
+
+    document.getElementById('reset-zoom').addEventListener('click', function() {
+        document.getElementById('zoom-slider').value = 100;
+        setZoomLevel(100);
+    });
+
+    document.getElementById('auto-zoom-window').addEventListener('click', setAutoZoomWindow);
+
+    document.getElementById('auto-zoom-device').addEventListener('click', setAutoZoomDevice);
+
+    idLists.forEach((list, index) => {
+        if (list) {
+            createButtons(list, index);
+        }
+    });
+
+    updateButtonStates();
+    updateImage();
+    preloadNearbyImages(); // Preload images on initial load
+</script>
+
+</body>
+</html>
+
