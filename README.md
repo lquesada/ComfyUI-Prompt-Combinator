@@ -12,7 +12,7 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 
 "🔢 Prompt Combinator Export Gallery" is a node that generates an .html gallery to navigate the output of Prompt Combinator (prompts vs. images)
 
-See an example of gallery [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example), also a gallery all embedded in html [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example_embedded).
+See an example of gallery [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example), also a gallery with all embedded in a single html [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example_embedded).
 
 ## Simple example
 Download the following example workflow from [here](prompt-combinator_example_workflow.json) or drag and drop the screenshot into ComfyUI.
