@@ -1,5 +1,6 @@
 from itertools import product
 import re
+import random
 import os
 import base64
 
@@ -375,3 +376,41 @@ class PromptCombinatorExportGallery:
         print("Exported gallery to ",output_file)
 
         return { "ui": { "images": results } }
+
+
+class PromptCombinatorRandomPrompt:
+    """
+    ComfyUI-Prompt-Combinator
+    https://github.com/lquesada/ComfyUI-Prompt-Combinator
+
+    Node that picks a random prompt from a prompt combinator output.
+    """
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {
+            "required": {
+                "prompts": ("STRING", {"default": '', "multiline": True, "forceInput": True}),
+                "combination_ids": ("PROMPTCOMBINATORIDS",),
+                "seed": ("INT", {"default": 0, "min": 0, "max": 0xffffffffffffffff}),
+            },
+        }
+    INPUT_IS_LIST = True
+
+    RETURN_TYPES = ("STRING", "PROMPTCOMBINATORIDS", "STRING")
+    RETURN_NAMES = ("prompt", "combination_id", "filename")
+    FUNCTION = "pick_random"
+
+    OUTPUT_NODE = True
+
+    CATEGORY = "prompt_combinator"
+
+    def pick_random(self, prompts, combination_ids, seed):
+        assert len(combination_ids) == len(prompts), "Amount of combination ids must be the same as amount of prompts"
+    
+        index = random.randint(0, len(prompts) - 1)
+        prompt = prompts[index]
+        combination_id = combination_ids[index]
+
+        filename = '-'.join(combination_id)
+
+        return (prompt, combination_id, filename)

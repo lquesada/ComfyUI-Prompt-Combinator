@@ -12,6 +12,8 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 
 "🔢 Prompt Combinator Export Gallery" is a node that generates an .html gallery to navigate the output of Prompt Combinator (prompts vs. images)
 
+"🔢 Pick Random Prompt from Prompt Combinator" is a node that picks a single random prompt from a Prompt Combinator output
+
 See an example of gallery [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example), also a gallery with all embedded in a single html [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example_embedded).
 
 ## Simple example
@@ -122,6 +124,8 @@ scary@scary
 ```
 
 # Changelog
+## 2024-06-19
+- Added Pick Random Prompt from Prompt Combinator node.
 ## 2024-06-17
 - Added Prompt Combinator Export Gallery node.
 - Simplified input/output setup.
