@@ -314,7 +314,7 @@ class PromptCombinatorExportGallery:
                 elif image_export_format == ".webp lossy 90":
                     img.save(save_filename, method=6, exif=imgexif, lossless=False, quality=90)
                 else: # ".webp lossless"
-                    img.save(save_filename, method=6, exif=imgexif, lossless=True, quality=100)
+                    img.save(save_filename, method=6, exif=imgexif, lossless=True, quality=0)
             this_fileid.append(file)
             this_filenames.append(this_filename)
             save_filenames.append(save_filename)
