@@ -17,9 +17,9 @@ Check ComfyUI here: https://github.com/comfyanonymous/ComfyUI
 See an example of gallery [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example), also a gallery with all embedded in a single html [here](https://lquesada.github.io/ComfyUI-Prompt-Combinator/example_embedded).
 
 ## Simple example
-Download the following example workflow from [here](prompt-combinator_example_workflow.json) or drag and drop the screenshot into ComfyUI.
+Download the following example workflow from [here](example_workflows/promptcombinator.json) or drag and drop the screenshot into ComfyUI.
 
-![Workflow](prompt-combinator_example_workflow.png)
+![Workflow](promptcombinator.png)
 
 # Installation Instructions
 
